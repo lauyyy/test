@@ -1,0 +1,135 @@
+<script type="text/javascript">
+$(function(){
+	$(".chose").each(function(index,element) {
+        var td = $(this).parent().prev();
+		console.log(td.html());
+		switch(td.html()){
+			case "题型": loadData("type.json",$(this));
+			break;
+			case "方向": loadData("department.json",$(this));
+			break;
+			case "知识点": loadData("topics.json",$(this));
+			break;
+			case "难度": loadData("level.json",$(this));
+			break;
+		}
+    });
+	
+	function loadData(url,$element){
+		url = "tpl/json/"+url;
+		$.getJSON(url,function(data){
+			$(data).each(function(index, element) {
+				var a = $("<a>");
+				a.html(element.relname);
+				$element.append(a);
+			});
+			/*
+			data.forEach(function(item){
+				var a = $("<a>"+item.relname+"</a>")
+				$element.append(a);
+			});
+			*/
+			//点击标签a添加背景色
+			/*
+			$(".chose").children(":not('.active3')").on("click",function(){
+				$element.children(":not( :first-child)").removeClass("active3");
+				$(this).addClass("active3");
+			});
+			*/
+			$(".chose").children().eq(0).trigger("click");
+			$(".chose").children().off();
+			$(".chose").children().on("click",function(){
+				$(this).siblings().removeClass("active3");
+				$(this).addClass("active3");
+			});
+		});		
+	}
+});
+</script>
+				<!--题干列表-->
+                <div class="editingarea">
+                    <div class="c_flex"><span class="c_flexible"></span></div>
+                	<div class="c_editview">
+                   <div class="c_condition">
+                       <span><select><option>题干</option></select></span>
+                       <span class="pl5 " ><input type="text"></span>
+                       <span class="pl15 pr15 btn_gray ">查找</span>
+                       
+                    </div>
+                    <div class="divtable">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tablea">
+                        	<tr>
+                                <td align="center">题型</td>
+                                <td align="left">
+                                    <div class="chose">
+                                    	<a href="#" class="active3">全部</a>
+                                        
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td align="center">方向</td>
+                                <td align="left">
+                                    <div class="chose">
+                                    	<a href="#" class="active3">全部</a>
+                                       
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td align="center">知识点</td>
+                                <td align="left">
+                                    <div class="chose">
+                                    	<a href="#" class="active3">全部</a>
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">难度</td>
+                                <td align="left">
+                                    <div class="chose">
+                                    	<a href="#" class="active3">全部</a>
+                                        
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                    </div>
+                       <div class="Catalog">
+                           
+                           <div class="Catalog_right">
+                               <div class="Catalogtitle">
+                               	总计<em>15552</em>道题&nbsp;&nbsp;
+                                <input type="checkbox" />
+                                <b>显示答案和解析</b>&nbsp;&nbsp;
+                                
+                                <!--
+                                   <div>
+                                       <i>1</i>
+                                       <a href="#" class="pageone">前</a>
+                                       <a href="#" class="pagetwo">后</a>
+                                   </div>
+                               -->
+                               </div>
+                               <div class="Catalog_rightnei">
+                                    <div class="Catalogtitwo"></div>
+                                    <div class="Catalogcontent">
+                                        <div class="Catalogcontentup"></div>
+                                        
+                                    </div>
+                               </div>
+                               <div class="Catalog_rightnei">
+                                    <div class="Catalogtitwo"></div>
+                                    <div class="Catalogcontent">
+                                      	<div class="Catalogcontentup"></div>
+                                      
+                                    </div>
+                               </div>
+                           </div>
+                           <div class="clear"></div>
+                       </div>
+                    </div>
+                </div>
